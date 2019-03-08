@@ -1,0 +1,39 @@
+{% extends 'base/base_main.html' %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'axf/order/css/order.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h3>订单编号：{{ order_number }}</h3>
+    <div class="full">
+        <section>
+            <menu>
+                <ul>
+                    {% for item in order_items %}
+                        <li class="menuList">
+                            <a href="">
+                                <img src="{{ item.goods.productimg }}" alt="">
+                                <p>{{ item.goods.productlongname }}</p>
+                                <p>{{ item.goods.price }}</p>
+                                <p>{{ item.desc|default:"" }}</p>
+                            </a>
+                            <section>
+                                <span>{{ item.goods_num }}</span>
+                                <button>删除</button>
+                            </section>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </menu>
+            <div class="payTheBill">待付款金额：￥{{ sum_money }}</div>
+            <button class="pay">支付</button>
+        </section>
+    </div>
+{% endblock %}
+{% block footer %}
+    <span></span>
+{% endblock %}
